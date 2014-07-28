@@ -1,0 +1,24 @@
+{
+  "name": "jTrackbot",
+  "version": "0.0.1",
+  "description": "jTrackbot =========",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Crazy-Ivan/jTrackbot.git"
+  },
+  "author": "Pawel Brod aka Crazy-Ivan",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/Crazy-Ivan/jTrackbot/issues"
+  },
+  "dependencies": {
+    "architect": "~0.1.11",
+    "pi-blaster.js": "0.0.2",
+    "pi-gpio": "0.0.6",
+    "socket.io": "~1.0.6"
+  }
+}
