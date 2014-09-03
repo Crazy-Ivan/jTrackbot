@@ -1,0 +1,9 @@
+{
+    "name": "motor",
+    "version": "0.0.1",
+    "main": "motor.js",
+    "private": true,
+    "plugin": {
+        "provides": ["motor"]
+    }
+}

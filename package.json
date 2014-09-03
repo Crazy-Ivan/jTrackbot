@@ -19,6 +19,12 @@
     "architect": "~0.1.11",
     "pi-blaster.js": "0.0.2",
     "pi-gpio": "0.0.6",
-    "socket.io": "~1.0.6"
+    "socket.io": "~1.0.6",
+    "path": "~0.4.9",
+    "winston": "~0.7.3",
+    "static-favicon": "~2.0.0-alpha",
+    "morgan": "~1.2.3",
+    "lodash": "~2.4.1",
+    "serve-favicon": "~2.1.1"
   }
 }
