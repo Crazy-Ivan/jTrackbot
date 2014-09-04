@@ -1,0 +1,10 @@
+{
+    "name": "movement",
+    "version": "0.0.1",
+    "main": "movement.js",
+    "private": true,
+    "plugin": {
+        "provides": [],
+        "consumes": ["motor", "websocket"]
+    }
+}

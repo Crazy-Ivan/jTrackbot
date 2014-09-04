@@ -22,10 +22,13 @@ module.exports = [
     {
         packagePath: './services/motor'
     },
+    {
+        packagePath: './services/websocket'
+    },
 
 	{
 		packagePath: './services/webserver',
-		port: 3000,
+		port: 5000,
 		favicon: './client/favicon.ico',
 		statics: [
 			'./client/vendor',
@@ -39,7 +42,12 @@ module.exports = [
 	 * ****************************************************************************
 	 */
 
-	
+//    {
+//        packagePath: './modules/movement'
+//	},
+    {
+        packagePath: './modules/camera'
+    }
 //	{
 //        packagePath: './modules/routes/page',
 //        path: './client/index.html'
