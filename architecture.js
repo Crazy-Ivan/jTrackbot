@@ -42,16 +42,19 @@ module.exports = [
 	 * ****************************************************************************
 	 */
 
-//    {
-//        packagePath: './modules/movement'
-//	},
+    {
+        packagePath: './modules/movement'
+	},
     {
         packagePath: './modules/camera'
-    }
-//	{
-//        packagePath: './modules/routes/page',
-//        path: './client/index.html'
-//	}
+    },
+    {
+        packagePath: './modules/control'
+    },
+	{
+        packagePath: './modules/routes/main',
+        path: './client/index.html'
+	}
 ];
 
 

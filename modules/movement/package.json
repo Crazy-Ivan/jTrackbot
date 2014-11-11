@@ -4,7 +4,7 @@
     "main": "movement.js",
     "private": true,
     "plugin": {
-        "provides": [],
+        "provides": ["movement"],
         "consumes": ["motor", "websocket"]
     }
 }

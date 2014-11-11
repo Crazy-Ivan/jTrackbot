@@ -4,7 +4,7 @@
     "main": "camera.js",
     "private": true,
     "plugin": {
-        "provides": [],
-        "consumes": ["websocket"]
+        "provides": ["camera"],
+        "consumes": []
     }
 }
