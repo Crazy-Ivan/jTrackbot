@@ -5,9 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<canvas id="canvas"></canvas>
-<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<canvas id="video"></canvas>
+<style>
+    body {
+        margin:0;
+        padding: 0;
+    }
+    #video {
+        width: 100%;
+    }
+</style>
+<script type="text/javascript" src="lib/jsmpg.js"></script>
 <script type="text/javascript">
+   var videoClient = new WebSocket('ws://192.168.0.15:8083');
+   var controlClient = new WebSocket('ws://192.168.0.15:8084');
+   var canvas = document.getElementById('video');
+   var player = new jsmpeg(videoClient, { canvas: canvas });
+
+
+   var availableKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'KeyR'];
+   var activeKeys = [];
+
+   function addKey(key) {
+       if(activeKeys.indexOf(event.code) === -1) {
+           activeKeys.push(key);
+           reactOnChanges();
+       }
+   }
+
+   function removeKey(key) {
+       if(activeKeys.indexOf(event.code) !== -1) {
+           activeKeys.splice(activeKeys.indexOf(key), 1);
+           reactOnChanges();
+       }
+   }
+
+   function reactOnChanges() {
+       console.log(activeKeys);
+       controlClient.send(JSON.stringify(activeKeys));
+   }
+
+    document.onkeydown = function(event) {
+      if(availableKeys.indexOf(event.code) !== -1) {
+          addKey(event.code);
+      }
+    };
+
+    document.onkeyup = function(event) {
+        if(availableKeys.indexOf(event.code) !== -1) {
+            removeKey(event.code);
+        }
+    }
+
 
 </script>
 </body>

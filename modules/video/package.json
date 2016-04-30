@@ -1,0 +1,10 @@
+{
+    "name": "video",
+    "version": "0.0.1",
+    "main": "video.js",
+    "private": true,
+    "plugin": {
+        "provides": ["video"],
+        "consumes": ["websocket", "camera", "logger"]
+    }
+}

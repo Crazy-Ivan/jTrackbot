@@ -4,7 +4,7 @@
     "main": "websocket.js",
     "private": true,
     "plugin": {
-        "consumes": ["logger", "webserver"],
+        "consumes": [],
         "provides": ["websocket"]
     }
 }

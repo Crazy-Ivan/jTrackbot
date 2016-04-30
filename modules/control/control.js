@@ -1,15 +1,47 @@
 module.exports = function setup(options, imports, register) {
+    var controlSocketServer = imports.websocket.createServer({ port: 8084 });
+    var video = imports.video;
+    var movement = imports.movement;
+    var logger = imports.logger;
 
-    var camera =  imports.camera;
-    var move = imports.movement;
-    var ws = imports.websocket;
+    controlSocketServer.on('connection', function(ws) {
+        logger.info('New connection to control server');
+        ws.on('message', parseCommand);
+    });
 
-    function onCameraData(data) {
-        ws.emit('videoStream', data);
+    function keysToMovementCommand(keys) {
+        var availableKeys = {
+            'ArrowUp': 'forward',
+            'ArrowDown': 'backward',
+            'ArrowLeft': 'left',
+            'ArrowRight': 'right'
+        };
+
+        //keys.filter(function(item) {
+        //    return !!(availableKeys[item]);
+        //});
+        //
+
+
+
+        //movement('forward');
     }
 
-    camera.run('default', onCameraData);
-    register(null, {});
+    function keysToVideoCommand(keys) {
+        var availableKeys = {
+            'KeyR': 'reset'
+        };
+
+        if(keys.indexOf('KeyR') !== -1) {
+            video.reset();
+        }
+    }
+
+    function parseCommand(keys) {
+        keysToVideoCommand(keys);
+        keysToMovementCommand(keys);
+    }
+
 
 };
 

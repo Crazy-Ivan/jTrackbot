@@ -1,14 +1,30 @@
-var io = require('socket.io');
+var ws = require('ws');
 
 module.exports = function setup(options, imports, register) {
 
-	var webserver = imports.webserver,
-		logger = imports.logger;
+	function broadcast(data, options) {
+		for(var i in this.clients) {
+			if(this.clients[i].readyState = 1) {
+				this.clients[i].send(data, options);
+			}
+		}
+	}
 
-	io = io.listen(webserver.http);
-    io.set('log level', 2);
+	function createServer(options) {
+		var server = new ws.Server(options);
+		server.broadcast = broadcast;
+
+		return server;
+	}
+
+	function connect(url) {
+		return new ws(url);
+	}
+
 	register(null, {
-		websocket: io
+		websocket: {
+			createServer: createServer,
+			connect: connect
+		}
 	});
-
 };

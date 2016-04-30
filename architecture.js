@@ -19,6 +19,9 @@ module.exports = [
 			}
 		]
 	},
+	{
+		packagePath: './services/camera'
+	},
     {
         packagePath: './services/motor'
     },
@@ -45,9 +48,9 @@ module.exports = [
     {
         packagePath: './modules/movement'
 	},
-    {
-        packagePath: './modules/camera'
-    },
+	{
+		packagePath: './modules/video'
+	},
     {
         packagePath: './modules/control'
     },

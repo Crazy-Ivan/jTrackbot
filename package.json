@@ -27,6 +27,9 @@
     "lodash": "~2.4.1",
     "serve-favicon": "~2.1.1",
     "express": "^4.8.7",
-    "fluent-ffmpeg": "^2.0.0-rc2"
+    "fluent-ffmpeg": "^2.0.0-rc2",
+    "ws": "^1.1.0",
+    "bufferutil": "^1.2.1",
+    "utf-8-validate": "^1.2.1"
   }
 }
