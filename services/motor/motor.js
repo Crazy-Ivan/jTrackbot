@@ -7,8 +7,8 @@ module.exports = function setup(options, imports, register) {
 
 
         this.powerPin = powerPin;
-        this.directionPinA = directionPinA;
-        this.directionPinB = directionPinB;
+        this.directionPinA = { nr: directionPinA, value: 0 };
+        this.directionPinB = { nr: directionPinB, value: 0 };
 
         this.power = 0;
         this.direction = true;
@@ -16,10 +16,13 @@ module.exports = function setup(options, imports, register) {
 
    function setDirectionPin(pin, value) {
 
-       if(value === 0 || value === 1) {
-           gpio.open(pin, "output", function(err) {
-               gpio.write(pin, value, function() {
-                   gpio.close(pin);
+       if((value === 0 || value === 1) && pin.value !== value) {
+
+           pin.value = value;
+
+           gpio.open(pin.nr, "output", function(err) {
+               gpio.write(pin.nr, pin.value, function() {
+                   gpio.close(pin.nr);
                });
            });
        }

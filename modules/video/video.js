@@ -46,8 +46,7 @@ module.exports = function setup(options, imports, register) {
 
     videoSocketServer.on('connection', onClientConnect);
     videoSocketServer.on('close', onClientClose);
-
-    startVideo();
+//    startVideo();
 
     register(null, {
         video: {

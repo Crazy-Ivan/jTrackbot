@@ -1,15 +1,16 @@
 
+
 module.exports = function setup(options, imports, register) {
 
     var motor = imports.motor;
 
-    var POWER_LEFT_MOTOR_PIN = 1,
-        DIRECTION_LEFT_MOTOR_PIN_A = 2,
-        DIRECTION_LEFT_MOTOR_PIN_B = 3,
+    var POWER_LEFT_MOTOR_PIN = 17,
+        DIRECTION_LEFT_MOTOR_PIN_A = 12,
+        DIRECTION_LEFT_MOTOR_PIN_B = 18,
 
-        POWER_RIGHT_MOTOR_PIN = 4,
-        DIRECTION_RIGHT_MOTOR_PIN_A = 5,
-        DIRECTION_RIGHT_MOTOR_PIN_B = 6,
+        POWER_RIGHT_MOTOR_PIN = 22,
+        DIRECTION_RIGHT_MOTOR_PIN_A = 16,
+        DIRECTION_RIGHT_MOTOR_PIN_B = 22,
 
         motorLeft = motor(POWER_LEFT_MOTOR_PIN, DIRECTION_LEFT_MOTOR_PIN_A, DIRECTION_LEFT_MOTOR_PIN_B),
         motorRight =  motor(POWER_RIGHT_MOTOR_PIN, DIRECTION_RIGHT_MOTOR_PIN_A, DIRECTION_RIGHT_MOTOR_PIN_B);

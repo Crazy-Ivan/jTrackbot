@@ -64,8 +64,13 @@ module.exports = function setup(options, imports, register) {
     }
 
     function stop() {
-        raspividProcess.kill();
-        ffmpegProcess.kill();
+        if(raspividProcess) {
+            raspividProcess.kill();
+        }
+
+        if(ffmpegProcess) {
+            ffmpegProcess.kill();
+        }
 
         logger.info('camera off');
     }

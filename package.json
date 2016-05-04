@@ -18,18 +18,18 @@
   "dependencies": {
     "architect": "~0.1.11",
     "pi-blaster.js": "0.0.2",
-    "pi-gpio": "0.0.6",
     "socket.io": "~1.0.6",
     "path": "~0.4.9",
     "winston": "~0.7.3",
     "static-favicon": "~2.0.0-alpha",
     "morgan": "~1.2.3",
-    "lodash": "~2.4.1",
+    "lodash": "^2.4.2",
     "serve-favicon": "~2.1.1",
     "express": "^4.8.7",
     "fluent-ffmpeg": "^2.0.0-rc2",
     "ws": "^1.1.0",
     "bufferutil": "^1.2.1",
-    "utf-8-validate": "^1.2.1"
+    "utf-8-validate": "^1.2.1",
+    "pi-gpio": "0.0.8"
   }
 }

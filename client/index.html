@@ -12,6 +12,7 @@
         padding: 0;
     }
     #video {
+        position: fixed;
         width: 100%;
     }
 </style>
@@ -23,8 +24,12 @@
    var player = new jsmpeg(videoClient, { canvas: canvas });
 
 
-   var availableKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'KeyR'];
+   var availableKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
    var activeKeys = [];
+
+   function includes(array, key) {
+       return array.indexOf(key) !== -1;
+   }
 
    function addKey(key) {
        if(activeKeys.indexOf(event.code) === -1) {
@@ -41,8 +46,41 @@
    }
 
    function reactOnChanges() {
-       console.log(activeKeys);
-       controlClient.send(JSON.stringify(activeKeys));
+       controlClient.send(JSON.stringify({
+           type: 'movement',
+           name: parseKeysToCommand(activeKeys)
+       }));
+   }
+
+
+
+   function parseKeysToCommand(keys) {
+       var hashTable = {
+         'ArrowUp': 'forward',
+         'ArrowDown': 'backward',
+         'ArrowLeft': 'left',
+         'ArrowRight': 'right'
+       };
+
+       var length =keys.length;
+
+       if(length == 1) {
+           return hashTable[keys[0]];
+       } else if(length == 2 ) {
+            if(includes(keys, 'ArrowUp') && includes(keys, 'ArrowLeft')) {
+                return hashTable.ArrowUp + '-' + hashTable.ArrowLeft;
+            } else if (includes(keys, 'ArrowUp') && includes(keys, 'ArrowRight')) {
+                return hashTable.ArrowUp + '-' + hashTable.ArrowRight;
+            } else if (includes(keys, 'ArrowDown') && includes(keys, 'ArrowLeft')) {
+                return hashTable.ArrowDown + '-' + hashTable.ArrowLeft;
+            } else if (includes(keys, 'ArrowDown') && includes(keys, 'ArrowRight')) {
+                return hashTable.ArrowDown + '-' + hashTable.ArrowRight;
+            } else {
+                return 'stop'
+            }
+       } else {
+           return 'stop'
+       }
    }
 
     document.onkeydown = function(event) {

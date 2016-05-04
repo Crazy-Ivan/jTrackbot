@@ -9,37 +9,35 @@ module.exports = function setup(options, imports, register) {
         ws.on('message', parseCommand);
     });
 
-    function keysToMovementCommand(keys) {
-        var availableKeys = {
-            'ArrowUp': 'forward',
-            'ArrowDown': 'backward',
-            'ArrowLeft': 'left',
-            'ArrowRight': 'right'
-        };
-
-        //keys.filter(function(item) {
-        //    return !!(availableKeys[item]);
-        //});
-        //
-
-
-
-        //movement('forward');
-    }
-
-    function keysToVideoCommand(keys) {
-        var availableKeys = {
-            'KeyR': 'reset'
-        };
-
-        if(keys.indexOf('KeyR') !== -1) {
-            video.reset();
+    function parseMovementCommand(command) {
+        var availableMovements = ['forward', 'backward', 'right', 'left', 'stop', 'forward-right', 'backward-right', 'forward-left', 'backward-left'];
+        console.log(command.type);
+        if(command.type == 'movement' && availableMovements.indexOf(command.name) !== -1) {
+            console.log(command.name);
+            movement(command.name);
         }
     }
 
-    function parseCommand(keys) {
-        keysToVideoCommand(keys);
-        keysToMovementCommand(keys);
+    function parseVideoCommand(command) {
+        if(command.type === 'video') {
+            switch(command.name) {
+                case 'reset':
+                    video.reset(command.payload);
+                    break;
+                case 'start':
+                    video.start(command.payload);
+                    break;
+                case 'stop':
+                    video.stop();
+                    break;
+            }
+        }
+    }
+
+    function parseCommand(command) {
+        command = JSON.parse(command);
+        parseVideoCommand(command);
+        parseMovementCommand(command);
     }
 
 
