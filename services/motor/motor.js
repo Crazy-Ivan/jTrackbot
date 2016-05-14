@@ -6,24 +6,42 @@ module.exports = function setup(options, imports, register) {
    function Motor(powerPin, directionPinA, directionPinB) {
 
         this.powerPin = powerPin;
-        this.directionPinA = { nr: directionPinA, value: 0 };
-        this.directionPinB = { nr: directionPinB, value: 0 };
+        this.directionPinA = { nr: directionPinA, value: 0, isOpen: false };
+        this.directionPinB = { nr: directionPinB, value: 0, isOpen: false };
 
         this.power = 0;
         this.direction = true;
+
+        this.openPins();
+   }
+
+   function openPin(pin) {
+       if(!pin.isOpen) {
+           gpio.close(pin.nr, function(){
+               gpio.open(pin.nr, "output", function(err) {
+                   if(!err) {
+                       pin.isOpen = true;
+                   }
+               })
+           });
+       }
+   }
+
+   function closePin(pin, callback) {
+       if(pin.isOpen) {
+           gpio.close(pin.nr, function(err) {
+               pin.isOpen = false;
+               callback();
+           });
+       }
    }
 
    function setDirectionPin(pin, value) {
 
-       if((value === 0 || value === 1) && pin.value !== value) {
+       if((value === 0 || value === 1) && pin.value !== value && pin.isOpen) {
 
            pin.value = value;
-
-           gpio.open(pin.nr, "output", function(err) {
-               gpio.write(pin.nr, pin.value, function() {
-                   gpio.close(pin.nr);
-               });
-           });
+           gpio.write(pin.nr, pin.value);
        }
    }
 
@@ -49,26 +67,33 @@ module.exports = function setup(options, imports, register) {
        this.direction = isForward;
    };
 
+    Motor.prototype.openPins = function() {
+        openPin(this.directionPinA);
+        openPin(this.directionPinB);
+    };
+
+    Motor.prototype.closePins = function() {
+       closePin(this.directionPinA);
+       closePin(this.directionPinB);
+   };
+
 
    function motorFactory(powerPin, directionPinA, directionPinB) {
        return new Motor(powerPin, directionPinA, directionPinB);
    }
 
-   function motorsStandBy(value){
-       if(value === 0 || value === 1) {
-           gpio.open(options.standByPin, "output", function(err) {
-               gpio.write(options.standByPin, value, function() {
-                   gpio.close(options.standByPin);
-               });
+   function initMotorDriver(standByPinNr) {
+       gpio.open(standByPinNr, "output", function(err) {
+           gpio.write(standByPinNr, 1, function() {
+               gpio.close(standByPinNr);
            });
-       }
+       });
+
+       return motorFactory;
    }
 
     register(null, {
-        motor: {
-            create: motorFactory,
-            standBy: motorsStandBy
-        }
+        motor: initMotorDriver
     });
 
 };

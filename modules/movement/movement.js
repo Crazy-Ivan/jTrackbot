@@ -2,9 +2,9 @@
 
 module.exports = function setup(options, imports, register) {
 
-    var motor = imports.motor;
+    var STANDBY_PIN = 7,
 
-    var POWER_LEFT_MOTOR_PIN = 17,
+        POWER_LEFT_MOTOR_PIN = 17,
         DIRECTION_LEFT_MOTOR_PIN_A = 12,
         DIRECTION_LEFT_MOTOR_PIN_B = 16,
 
@@ -12,10 +12,10 @@ module.exports = function setup(options, imports, register) {
         DIRECTION_RIGHT_MOTOR_PIN_A = 18,
         DIRECTION_RIGHT_MOTOR_PIN_B = 22,
 
-        motorLeft = motor.create(POWER_LEFT_MOTOR_PIN, DIRECTION_LEFT_MOTOR_PIN_A, DIRECTION_LEFT_MOTOR_PIN_B),
-        motorRight =  motor.create(POWER_RIGHT_MOTOR_PIN, DIRECTION_RIGHT_MOTOR_PIN_A, DIRECTION_RIGHT_MOTOR_PIN_B);
+        createMotor = imports.motor(STANDBY_PIN),
 
-    motor.standBy(1);
+        motorLeft = createMotor(POWER_LEFT_MOTOR_PIN, DIRECTION_LEFT_MOTOR_PIN_A, DIRECTION_LEFT_MOTOR_PIN_B),
+        motorRight = createMotor(POWER_RIGHT_MOTOR_PIN, DIRECTION_RIGHT_MOTOR_PIN_A, DIRECTION_RIGHT_MOTOR_PIN_B);
 
     function move(movement) {
 

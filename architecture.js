@@ -23,8 +23,7 @@ module.exports = [
 		packagePath: './services/camera'
 	},
     {
-        packagePath: './services/motor',
-		standByPin: 7
+        packagePath: './services/motor'
     },
     {
         packagePath: './services/websocket'
