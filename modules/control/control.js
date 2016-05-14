@@ -11,7 +11,6 @@ module.exports = function setup(options, imports, register) {
 
     function parseMovementCommand(command) {
         var availableMovements = ['forward', 'backward', 'right', 'left', 'stop', 'forward-right', 'backward-right', 'forward-left', 'backward-left'];
-        console.log(command.type);
         if(command.type == 'movement' && availableMovements.indexOf(command.name) !== -1) {
             console.log(command.name);
             movement(command.name);

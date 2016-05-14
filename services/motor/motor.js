@@ -5,7 +5,6 @@ module.exports = function setup(options, imports, register) {
 
    function Motor(powerPin, directionPinA, directionPinB) {
 
-
         this.powerPin = powerPin;
         this.directionPinA = { nr: directionPinA, value: 0 };
         this.directionPinB = { nr: directionPinB, value: 0 };
@@ -55,8 +54,21 @@ module.exports = function setup(options, imports, register) {
        return new Motor(powerPin, directionPinA, directionPinB);
    }
 
+   function motorsStandBy(value){
+       if(value === 0 || value === 1) {
+           gpio.open(options.standByPin, "output", function(err) {
+               gpio.write(options.standByPin, value, function() {
+                   gpio.close(options.standByPin);
+               });
+           });
+       }
+   }
+
     register(null, {
-        motor: motorFactory
+        motor: {
+            create: motorFactory,
+            standBy: motorsStandBy
+        }
     });
 
 };
