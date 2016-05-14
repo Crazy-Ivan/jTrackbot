@@ -4,11 +4,11 @@ module.exports = function setup(options, imports, register) {
 
     var STANDBY_PIN = 7,
 
-        POWER_LEFT_MOTOR_PIN = 17,
+        POWER_LEFT_MOTOR_PIN = 11,
         DIRECTION_LEFT_MOTOR_PIN_A = 12,
         DIRECTION_LEFT_MOTOR_PIN_B = 16,
 
-        POWER_RIGHT_MOTOR_PIN = 22,
+        POWER_RIGHT_MOTOR_PIN = 15,
         DIRECTION_RIGHT_MOTOR_PIN_A = 18,
         DIRECTION_RIGHT_MOTOR_PIN_B = 22,
 

@@ -1,11 +1,12 @@
 var pwm = require('pi-blaster.js');
 var gpio = require('pi-gpio');
+var pinTranslator = require('./pinTranslator');
 
 module.exports = function setup(options, imports, register) {
 
    function Motor(powerPin, directionPinA, directionPinB) {
 
-        this.powerPin = powerPin;
+        this.powerPin = pinTranslator(powerPin); // pi-blaster is using different notation than pi-gpio. We want to be consistent.
         this.directionPinA = { nr: directionPinA, value: 0, isOpen: false };
         this.directionPinB = { nr: directionPinB, value: 0, isOpen: false };
 
